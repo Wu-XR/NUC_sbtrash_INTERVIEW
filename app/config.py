@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "AI面试系统"
     APP_VERSION: str = "1.0.0"
     APP_DESCRIPTION: str = "RAG容器运行的AI面试系统"
-    DEBUG: bool = False
+    DEBUG: bool = True
     HOST: str = "0.0.0.0"
     PORT: int = 8000
     
