@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     QDRANT_URL: str = "http://localhost:6333"
     QDRANT_API_KEY: Optional[str] = None
     
-    DEFAULT_LLM_MODEL: str = "Qwen3"
+    DEFAULT_LLM_MODEL: str = "Qwen2.5vl:7b"
     EMBEDDING_MODEL: str = "Qwen3-Embedding-0.6B"
     
     class Config:
