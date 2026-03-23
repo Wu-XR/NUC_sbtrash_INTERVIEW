@@ -1,0 +1,58 @@
+# IDE 配置
+../.idea/
+*.iml
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 虚拟环境
+venv/
+env/
+ENV/
+.venv
+
+# Python 依赖
+*.egg-info/
+dist/
+build/
+eggs/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 测试和覆盖率
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# 项目特定（如果有）
+*.bak
+*.orig
