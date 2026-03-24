@@ -172,3 +172,5 @@ class LLMResponse:
             f"LLMResponse(model='{self.model}', provider='{self.provider}', "
             f"content='{self.content[:50]}...')"
         )
+
+
