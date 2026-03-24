@@ -32,9 +32,46 @@ logger = logging.getLogger(__name__)
 #│   }                             │  返回文字结果         │
 #│                                 └─────────────────────┘
 #├─④ 收到 JSON 响应
-#│   {"message": {"content": "面试者是一位约25岁的男性..."}}
+#│   {"message": {"content": "面试者是一位约25岁的男性..."}} // 或者扫福瑞 笑:)
 #│
 #└─⑤ 返回
+
+"""
+llm_client.py
+│
+├── 数据结构
+│   ├── ChatMessage          ← 消息格式转换
+│   └── LLMResponse          ← 响应结果包装
+│
+├── 异常
+│   ├── LLMClientError       ← 基类
+│   ├── LLMConnectionError   ← 连不上
+│   ├── LLMTimeoutError      ← 超时
+│   └── LLMResponseError     ← 返回错误
+│
+├── LLMClient（核心类）
+│   │
+│   ├── 私有（内部自动调）
+│   │   ├── _get_http_client()
+│   │   ├── _ollama_chat()
+│   │   ├── _ollama_chat_stream()
+│   │   ├── _openai_chat()
+│   │   └── _openai_chat_stream()
+│   │
+│   └── 公开
+│       ├── chat()                 ← 单轮文本对话（最常用）
+│       ├── chat_messages()        ← 多轮对话
+│       ├── chat_stream()          ← 流式输出
+│       ├── chat_with_vision()     ← 图片+文本（摄像头场景用这个）
+│       ├── chat_with_image_file() ← 传文件路径，自动转 base64
+│       ├── health_check()         ← 服务是否在线
+│       └── list_models()          ← 查可用模型列表
+│
+├── llm_client                ← 全局实例，import 直接用
+├── create_ollama_client()    ← 工厂：自定义 Ollama 客户端
+└── create_openai_client()    ← 工厂：OpenAI/DeepSeek 客户端
+
+"""
 
 
 # ============================================================================
@@ -89,3 +126,49 @@ class ChatMessage:
                 })
             return {"role": self.role, "content": content_parts}
         return {"role": self.role, "content": self.content}
+
+
+# ============================================================================
+# LLM 调用响应
+# ============================================================================
+
+class LLMResponse:
+    """
+    LLM 响应结果封装
+
+    Attributes:
+        content: 回复文本内容
+        model: 使用的模型名称
+        provider: 提供商
+        total_duration: 总耗时（纳秒，仅 Ollama）
+        prompt_eval_count: prompt token 数量
+        eval_count: 生成 token 数量
+        raw_response: 原始响应数据
+    """
+
+    def __init__(
+            self,
+            content: str,
+            model: str = "",
+            provider: str = "",
+            total_duration: Optional[int] = None,
+            prompt_eval_count: Optional[int] = None,
+            eval_count: Optional[int] = None,
+            raw_response: Optional[Dict[str, Any]] = None
+    ):
+        self.content = content
+        self.model = model
+        self.provider = provider
+        self.total_duration = total_duration
+        self.prompt_eval_count = prompt_eval_count
+        self.eval_count = eval_count
+        self.raw_response = raw_response or {}
+
+    def __str__(self) -> str:
+        return self.content
+
+    def __repr__(self) -> str:
+        return (
+            f"LLMResponse(model='{self.model}', provider='{self.provider}', "
+            f"content='{self.content[:50]}...')"
+        )
