@@ -1,9 +1,9 @@
 
-# AI 采访系统
+# AI 面试系统
 
 ## 项目结构
 <!-- TOC -->
-* [AI 采访系统](#ai-采访系统)
+* [AI 面试系统](#ai-面试系统)
   * [项目结构](#项目结构)
 <!-- TOC -->
 ```
@@ -53,8 +53,10 @@ ai-interview-system/
 │   └── processed/                         # 向量化后的分块缓存
 │
 ├── scripts/                               # 工具脚本
-│   ├── ingest_knowledge.py                # 知识库文档导入
-│   └── seed_data.py                       # 初始化测试数据
+│   ├── .gitkeep
+│   ├── README.md                          # 说明书
+│   ├── setup_ollama_windows.ps1           # Windows环境使用Ollama部署大语言模型
+│   └── set_up_ollama_linux.sh             # Linux环境使用Ollama部署大语言模型            
 │
 ├── tests/                                 # 测试
 │   ├── __init__.py
