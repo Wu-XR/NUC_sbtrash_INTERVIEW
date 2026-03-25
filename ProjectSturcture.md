@@ -53,7 +53,6 @@ ai-interview-system/
 │   └── processed/                         # 向量化后的分块缓存
 │
 ├── scripts/                               # 工具脚本
-│   ├── .gitkeep
 │   ├── README.md                          # 说明书
 │   ├── setup_ollama_windows.ps1           # Windows环境使用Ollama部署大语言模型
 │   └── set_up_ollama_linux.sh             # Linux环境使用Ollama部署大语言模型            
