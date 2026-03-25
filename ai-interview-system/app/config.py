@@ -2,9 +2,9 @@ from pydantic_settings import BaseSettings
 from typing import List, Optional
 
 class Settings(BaseSettings):
-    APP_NAME: str = "AI面试系统"
+    APP_NAME: str = "AI Interview System"
     APP_VERSION: str = "1.0.0"
-    APP_DESCRIPTION: str = "RAG容器运行的AI面试系统"
+    APP_DESCRIPTION: str = "An AI-powered interview system with RAG capabilities"
     DEBUG: bool = True
     HOST: str = "0.0.0.0"
     PORT: int = 8000
