@@ -1,15 +1,123 @@
 # 这个是用来异常处理的
 
-import logging
 from fastapi import Request
 from fastapi.responses import JSONResponse
+import logging
+
+logger = logging.getLogger(__name__)
+
+from .llm_client import (
+    LLMClientError,
+    LLMConnectionError,
+    LLMTimeoutError,
+    LLMResponseError,
+)
+
+# ============================================================================
+# 第二部分：FastAPI 异常处理器
+#
+# 每个处理器对应一种异常，做三件事：
+#   1. 记日志（logger.error）
+#   2. 选 HTTP 状态码
+#   3. 返回结构化 JSON 给前端
+# ============================================================================
+
+async def handle_connection_error(request: Request, exc: LLMConnectionError):
+    """
+    处理：连不上服务
+    状态码：503（服务不可用）
+    什么时候触发：Ollama 没启动 / DeepSeek 网络断了
+    """
+    logger.error(f"[LLM连接失败] {request.url.path} | {exc.message} | {exc.detail}")
+    return JSONResponse(
+        status_code=503,
+        content={
+            "error": "llm_connection_error",
+            "message": exc.message,
+            "detail": exc.detail,
+            "suggestion": "请检查：1. Ollama是否启动(ollama serve) 2. 网络是否正常",
+        }
+    )
 
 
+async def handle_timeout_error(request: Request, exc: LLMTimeoutError):
+    """
+    处理：请求超时
+    状态码：504（网关超时）
+    什么时候触发：本地7B模型推理超过300秒
+    """
+    logger.error(f"[LLM超时] {request.url.path} | {exc.message} | {exc.detail}")
+    return JSONResponse(
+        status_code=504,
+        content={
+            "error": "llm_timeout_error",
+            "message": exc.message,
+            "detail": exc.detail,
+            "suggestion": "本地模型推理较慢，可尝试减少输入内容或增大超时时间",
+        }
+    )
 
 
+async def handle_response_error(request: Request, exc: LLMResponseError):
+    """
+    处理：响应异常
+    状态码：502（错误网关）
+    什么时候触发：模型返回了错误状态码（比如模型名字写错了）
+    """
+    logger.error(f"[LLM响应异常] {request.url.path} | {exc.message} | {exc.detail}")
+    return JSONResponse(
+        status_code=502,
+        content={
+            "error": "llm_response_error",
+            "message": exc.message,
+            "detail": exc.detail,
+        }
+    )
 
 
+async def handle_general_error(request: Request, exc: LLMClientError):
+    """
+    处理：其他所有 LLM 异常（兜底）
+    状态码：500
+    什么时候触发：上面三个都没匹配上的未知错误
+    """
+    logger.error(f"[LLM未知异常] {request.url.path} | {exc.message} | {exc.detail}")
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "llm_client_error",
+            "message": exc.message,
+            "detail": exc.detail,
+        }
+    )
 
+
+# ============================================================================
+# 第三部分：一键注册函数
+#
+# 在 main.py 里调一次就行：register_llm_exception_handlers(app)
+#
+# 注意：子类必须在父类前面注册！
+# 因为 FastAPI 是从上往下匹配的，如果父类在前面，
+# 子类的异常会被父类的处理器先接住，子类的处理器就永远用不上了
+# ============================================================================
+
+def register_llm_exception_handlers(app):
+    """把所有异常处理器注册到 FastAPI"""
+    app.add_exception_handler(LLMConnectionError, handle_connection_error)  # 子类1
+    app.add_exception_handler(LLMTimeoutError, handle_timeout_error)        # 子类2
+    app.add_exception_handler(LLMResponseError, handle_response_error)      # 子类3
+    app.add_exception_handler(LLMClientError, handle_general_error)         # 父类（兜底，放最后）
+
+
+# ============================================================================
+# 以上为 llm_exceptions.py 的全部内容
+#
+# 文件关系：
+#   llm_exceptions.py → 定义异常 + 处理器
+#   llm_client.py     → import 异常类，在出错时 raise
+#   main.py           → import register 函数，注册处理器
+# ============================================================================
 
 
 
@@ -84,5 +192,4 @@ from fastapi.responses import JSONResponse
 %..++.........+...........................+............._.+.._....++..._______.+.+^^...+++++........
 %...+........_+...........................^................++...........__.++.+^^+.+^+++++.+^.......
 %...++.........+..........................^................_.+^+......______._++++...^+++...++......
-
 """
