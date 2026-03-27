@@ -135,7 +135,8 @@ resp.provider # → "deepseek"
 llm_client.py
 │
 ├── 数据结构
-│   └── LLMResponse               ← 响应结果包装（没变）
+│   └── LLMProvider               ← 提供包装
+│   └── LLMResponse               ← 响应结果包装
 │
 ├── 异常
 │   ├── LLMClientError            ← 基类（没变）
@@ -167,52 +168,79 @@ llm_client.py
 # ============================================================================
 
 class LLMProvider(str, Enum):
-    """LLM 提供商枚举"""
-    OLLAMA = "ollama"       # 本地 Ollama
-    OPENAI = "openai"       # OpenAI API
+    """LLM 提供商"""
+    OLLAMA = "ollama"         # 本地 Ollama — 图像识别
+    DEEPSEEK = "deepseek"     # 远程 DeepSeek — 文本对话
 
 
-# Ollama API 默认地址
+# 默认地址
 OLLAMA_BASE_URL = "http://localhost:11434"
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
 
-# OpenAI API 地址
-OPENAI_BASE_URL = "https://api.deepseek.com"
-# 其实这里，呃，本地模型一般比较慢，实时问答这些东西，我建议用deepseek、
-# 支持国货，我是吴京的，所以用deepseek
-
-# 默认超时时间（秒）—— 本地 7B 模型推理可能较慢，给足时间
+# 默认超时（秒）— 本地 7B 模型推理慢，给足时间
 DEFAULT_TIMEOUT = 300.0
 
-# 默认重试次数 —— 本地服务偶尔可能请求失败，适当重试
+# 默认重试次数
 DEFAULT_MAX_RETRIES = 3
 
 
-class ChatMessage:
-    """统一消息结构，一份数据两种输出"""
+# ============================================================================
+# 响应结构
+# ============================================================================
 
-    def __init__(self, role: str, content: str, images: Optional[List[str]] = None):
-        self.role = role  # "system" / "user" / "assistant"
-        self.content = content  # 文本内容
-        self.images = images or []  # 图片（base64），多模态用
+class LLMResponse:
+    """
+    LLM 响应结果
 
-    def to_ollama_dict(self) -> Dict[str, Any]:
-        """转成 Ollama 要的格式"""
-        msg = {"role": self.role, "content": self.content}
-        if self.images:
-            msg["images"] = self.images  # Ollama 就是直接放 images 字段
-        return msg
+    Attributes:
+        content:  AI 回复的文本（最常用，拿这个就行）
+        model:    用了哪个模型（"qwen2.5-vl:7b" 或 "deepseek-chat"）
+        provider: 谁提供的（LLMProvider.OLLAMA 或 LLMProvider.DEEPSEEK）
+    """
+    def __init__(
+        self,
+        content: str,
+        model: str = "",
+        provider: LLMProvider = LLMProvider.OLLAMA,
+    ):
+        self.content = content
+        self.model = model
+        self.provider = provider
 
-    def to_openai_dict(self) -> Dict[str, Any]:
-        """转成 OpenAI 要的格式"""
-        if self.images:
-            # OpenAI 要把文本和图片拆成 content 数组
-            content_parts = [{"type": "text", "text": self.content}]
-            for img in self.images:
-                content_parts.append({
-                    "type": "image_url",
-                    "image_url": {"url": f"data:image/jpeg;base64,{img}"}
-                })
-            return {"role": self.role, "content": content_parts}
-        return {"role": self.role, "content": self.content}
+    def __str__(self) -> str:
+        return self.content
 
+    def __repr__(self) -> str:
+        return f"LLMResponse(provider='{self.provider.value}', model='{self.model}')"
+
+# ============================================================================
+# 异常类
+# =============================================================================
+
+"""
+├── LLMClientError            ← 基类（没变）
+├── LLMConnectionError        ← 连不上（没变）
+├── LLMTimeoutError           ← 超时（没变）
+└── LLMResponseError          ← 返回错误（没变）
+"""
+
+# 第一层：基类，所有 LLM 错误的"老大"
+class LLMClientError(Exception):
+    def __init__(self, message="LLM 服务异常", detail=""):
+        self.message = message    # 错误信息（简短）
+        self.detail = detail      # 详细原因（排查用）
+        super().__init__(self.message)  # 告诉 Python 的 Exception 基类
+
+# 第二层：具体的错误类型，都继承自"老大"
+class LLMConnectionError(LLMClientError):    # 连不上
+    def __init__(self, message="无法连接到 LLM 服务", detail=""):
+        super().__init__(message, detail)
+
+class LLMTimeoutError(LLMClientError):       # 超时
+    def __init__(self, message="LLM 请求超时", detail=""):
+        super().__init__(message, detail)
+
+class LLMResponseError(LLMClientError):      # 返回的数据有问题
+    def __init__(self, message="LLM 响应异常", detail=""):
+        super().__init__(message, detail)
 
