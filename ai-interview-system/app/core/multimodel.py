@@ -20,3 +20,15 @@ def _select_device(preferred: str = "auto") -> str:
 
 # 这个其实没啥用就是，就是看你有没有CUDA，有CUDA用CUDA,然后，呃呃呃
 # 然后记录到log
+
+"""
+    音频
+      ↓
+  multimodal.py（Whisper 转文字）
+      ↓
+  返回文本字符串
+      ↓
+  其他模块拿到文本去用（LLM 评分 / RAG 检索等）
+
+"""
+
