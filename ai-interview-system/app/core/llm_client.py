@@ -20,9 +20,9 @@ logger = logging.getLogger(__name__)
 #│
 #├─③ HTTP POST 到 Ollama      → 发送到 localhost:11434/api/chat
 #│   {                             ┌─────────────────────┐
-#│     "model": "qwen2.5-vl:7b",   │  Ollama 收到请求     │
+#│     "model": "qwen2.5vl:7b",   │  Ollama 收到请求     │
 #│     "messages": [{              │  ↓                  │
-#│       "content": "请描述...",    │  qwen2.5-vl 模型推理 │
+#│       "content": "请描述...",    │ qwen2.5vl:7b模型推理 │
 #│       "images": ["base64..."]   │  （GPU 在这里干活）   │
 #│     }]                          │  ↓                  │
 #│   }                             │  返回文字结果         │
@@ -190,7 +190,7 @@ class LLMResponse:
 
     Attributes:
         content:  AI 回复的文本（最常用，拿这个就行）
-        model:    用了哪个模型（"qwen2.5-vl:7b" 或 "deepseek-chat"）
+        model:    用了哪个模型（"qwen2.5vl:7b" 或 "deepseek-chat"）
         provider: 谁提供的（LLMProvider.OLLAMA 或 LLMProvider.DEEPSEEK）
     """
     def __init__(
@@ -259,7 +259,7 @@ class LLMClient:
         self,
         # Ollama（本地图像识别）
         ollama_base_url: str = "http://localhost:11434",
-        ollama_model: str = "qwen2.5-vl:7b",
+        ollama_model: str = "qwen2.5vl:7b",
         # DeepSeek（远程对话）
         deepseek_base_url: str = "https://api.deepseek.com",
         deepseek_model: str = "deepseek-chat",
@@ -488,7 +488,7 @@ class LLMClient:
     #
     #   发给 Ollama 的 JSON 长这样：
     #   {
-    #     "model": "qwen2.5-vl:7b",
+    #     "model": "qwen2.5vl:7b",
     #     "messages": [{
     #       "role": "user",
     #       "content": "描述这张图片",
@@ -505,7 +505,7 @@ class LLMClient:
         temperature: float = 0.3,
     ) -> LLMResponse:
         """
-        纯图像识别 → 走本地 Ollama（qwen2.5-vl:7b）
+        纯图像识别 → 走本地 Ollama（qwen2.5vl:7b）
 
         Args:
             images:        base64 编码的图片列表

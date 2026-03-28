@@ -1,3 +1,4 @@
+import time
 import whisper
 import torch
 import logging
@@ -172,10 +173,63 @@ class AudioTranscriber:
     |
 存储下来
     |
-发给本地部署的Ollama小模型 qwen2.5-vl:7b 让这个模型来分析照片里的内容，给出一些分析结果（比如表情、姿态、眼神等等），用于面试参考
+发给本地部署的Ollama小模型 qwen2.5vl:7b 让这个模型来分析照片里的内容，给出一些分析结果（比如表情、姿态、眼神等等），用于面试参考
 接着，生成json，进一步处理
 
 我接口前面倒是写好了，现在我们要完成这些相关的函数
 
-
 """
+
+# 拍照的默认存储目录，运行时如果不存在会自动创建
+CAPTURE_DIR = "uploads/captures"
+
+
+class VideoCapture:
+    """摄像头操作工具：打开摄像头 → 拍照 → 存成 jpg → 返回文件路径"""
+
+    def __init__(self, camera_id: int = 0, save_dir: str = CAPTURE_DIR):
+        # camera_id: 摄像头编号，0 是电脑默认摄像头，1 是第二个，以此类推
+        self.camera_id = camera_id
+        # save_dir: 照片存到哪个文件夹，默认用上面定义的 CAPTURE_DIR
+        self.save_dir = save_dir
+        # 如果文件夹不存在就创建，exist_ok=True 表示已存在也不报错
+        os.makedirs(self.save_dir, exist_ok=True)
+
+    def capture_frame(self, filename: Optional[str] = None) -> str:
+        """拍一张照片，返回保存路径"""
+
+        # 打开摄像头，得到一个摄像头对象 cap
+        cap = cv2.VideoCapture(self.camera_id)
+
+        # 检查摄像头是否成功打开（没摄像头、被占用等情况会失败）
+        if not cap.isOpened():
+            raise RuntimeError(f"无法打开摄像头 {self.camera_id}")
+
+        # 从摄像头读取一帧画面
+        # ret: bool，True 表示读取成功，False 表示失败
+        # frame: numpy 数组，就是这一帧的图像像素数据，shape 类似 (480, 640, 3)
+        ret, frame = cap.read()
+
+        # 释放摄像头，不释放的话其他程序就打不开它了
+        cap.release()
+
+        # 如果读取失败或者拿到的是空数据，报错
+        if not ret or frame is None:
+            raise RuntimeError("摄像头读取帧失败")
+
+        # 如果调用时没传文件名，就用当前时间戳自动生成一个
+        # 比如 "1711612800.jpg"
+        if filename is None:
+            filename = f"{int(time.time())}.jpg"
+
+        # 拼出完整的保存路径，比如 "uploads/captures/1711612800.jpg"
+        save_path = os.path.join(self.save_dir, filename)
+
+        # 用 OpenCV 把 frame（numpy 数组）写成 jpg 图片文件存到磁盘
+        cv2.imwrite(save_path, frame)
+
+        # 打日志记录一下存到了哪里
+        logger.info(f"Captured frame saved: {save_path}")
+
+        # 返回文件路径字符串，后续可以丢给调用
+        return save_path

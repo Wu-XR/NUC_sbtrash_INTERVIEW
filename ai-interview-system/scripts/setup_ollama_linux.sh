@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# Ollama + qwen2.5-vl:7b 一键部署脚本（Linux / Arch Linux）
+# Ollama + qwen2.5vl:7b 一键部署脚本（Linux / Arch Linux）
 # 用法：bash scripts/setup_ollama_linux.sh
 # ============================================================
 set -euo pipefail
@@ -25,7 +25,7 @@ step()  { echo -e "\n${MAGENTA}========== $* ==========${NC}"; }
 # ============================================================
 echo ""
 echo -e "${CYAN}  ╔══════════════════════════════════════════════╗${NC}"
-echo -e "${CYAN}  ║   Ollama + qwen2.5-vl:7b  一键部署脚本       ║${NC}"
+echo -e "${CYAN}  ║   Ollama + qwen2.5vl:7b  一键部署脚本       ║${NC}"
 echo -e "${CYAN}  ║   适用平台：Linux（含 Arch Linux）             ║${NC}"
 echo -e "${CYAN}  ╚══════════════════════════════════════════════╝${NC}"
 echo ""
@@ -35,7 +35,7 @@ info "  2. 配置环境变量 OLLAMA_MODELS（模型存储路径）"
 info "  3. 配置环境变量 OLLAMA_HOST（国内镜像源）"
 info "  4. 创建模型目录"
 info "  5. 确保 Ollama 服务正在运行"
-info "  6. 下载 qwen2.5-vl:7b 模型（可选）"
+info "  6. 下载 qwen2.5vl:7b 模型（可选）"
 echo ""
 
 # ============================================================
@@ -192,25 +192,25 @@ else
 fi
 
 # ============================================================
-# 步骤 6：下载 qwen2.5-vl:7b 模型
+# 步骤 6：下载 qwen2.5vl:7b 模型
 # ============================================================
-step "步骤 6/6  下载 qwen2.5-vl:7b 模型"
+step "步骤 6/6  下载 qwen2.5vl:7b 模型"
 
 warn "模型大小约 5~6 GB，首次下载需要一定时间，请保持网络畅通。"
-read -p "$(echo -e "${YELLOW}是否现在下载 qwen2.5-vl:7b？[Y/n] ${NC}")" PULL_ANSWER
+read -p "$(echo -e "${YELLOW}是否现在下载 qwen2.5vl:7b？[Y/n] ${NC}")" PULL_ANSWER
 PULL_ANSWER="${PULL_ANSWER:-Y}"
 
 MODEL_PULLED=false
 if [[ "$PULL_ANSWER" =~ ^[Yy]$ ]]; then
-    info "正在下载 qwen2.5-vl:7b，请耐心等待..."
-    if ollama pull qwen2.5-vl:7b; then
+    info "正在下载 qwen2.5vl:7b，请耐心等待..."
+    if ollama pull qwen2.5vl:7b; then
         ok "模型下载成功！"
         MODEL_PULLED=true
     else
-        err "模型下载失败，请检查网络或手动运行：ollama pull qwen2.5-vl:7b"
+        err "模型下载失败，请检查网络或手动运行：ollama pull qwen2.5vl:7b"
     fi
 else
-    warn "已跳过模型下载。稍后可手动运行：ollama pull qwen2.5-vl:7b"
+    warn "已跳过模型下载。稍后可手动运行：ollama pull qwen2.5vl:7b"
 fi
 
 if $MODEL_PULLED; then
@@ -253,11 +253,11 @@ print_check "OLLAMA_MODELS 已设置"   $MODELS_SET
 print_check "OLLAMA_HOST 已设置"     $HOST_SET
 print_check "模型目录已创建"          $DIR_EXISTS
 print_check "Ollama 服务已运行"       $SERVICE_STARTED
-print_check "qwen2.5-vl:7b 已下载"   $MODEL_PULLED
+print_check "qwen2.5vl:7b 已下载"   $MODEL_PULLED
 
 echo ""
 info "💡 环境变量已写入 ~/.bashrc，新开终端自动生效。"
 info "   当前终端已通过 export 立即生效。"
 info "💡 API 地址：http://localhost:11434"
-info "💡 测试命令：ollama run qwen2.5-vl:7b"
+info "💡 测试命令：ollama run qwen2.5vl:7b"
 echo ""

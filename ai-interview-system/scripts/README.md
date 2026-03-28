@@ -1,6 +1,6 @@
 # Ollama 部署脚本使用说明
 
-本目录下提供两个一键部署脚本，帮助团队成员快速配置 Ollama 环境并下载 `qwen2.5-vl:7b` 模型。
+本目录下提供两个一键部署脚本，帮助团队成员快速配置 Ollama 环境并下载 `qwen2.5vl:7b` 模型。
 
 ---
 
@@ -82,7 +82,7 @@
 | Windows | `D:\OllamaModels` |
 | Linux | `~/ollama_models`（即 `/home/你的用户名/ollama_models`） |
 
-模型文件体积较大，`qwen2.5-vl:7b` 约占 **5~6 GB** 磁盘空间，请确保所选路径有足够空间。
+模型文件体积较大，`qwen2.5vl:7b` 约占 **5~6 GB** 磁盘空间，请确保所选路径有足够空间。
 
 ---
 
@@ -107,7 +107,7 @@
 ollama list
 
 # 启动模型进行对话测试
-ollama run qwen2.5-vl:7b
+ollama run qwen2.5vl:7b
 
 # 查看 Ollama API 是否可访问
 curl http://localhost:11434/api/tags
