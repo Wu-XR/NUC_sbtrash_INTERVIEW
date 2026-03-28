@@ -232,3 +232,115 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+"""
+
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                         l###a                    ###M                                                           
+                                         !#M#h                    M#M#                                                           
+                                     -#M#m   ^MM##            ##M#    ##M#                                                       
+                                     ?###m   ^M#M#            M###    #M##                                                       
+                                 ittfjvvvt   'fffftttt    tttftfff    fffftftf                                                   
+                                 (M##Qiiil        #M#M    #M##            MM#M                                                   
+                                 (#M#Qi!il        ####    ##M#            #MM#                                                   
+                                 (##MU   'iiii    M#M#    M##M    >i>i    iii>#MMM`                                              
+                                 |###U   `i>i!    ####    #M##    i>i>    iiiiMM#M`                                              
+                             x###Xiii;   `ii>i    ##M#MMM#MMMM    >i>i>i>>    #MMM`                                              
+                             xM#MXiii;   '>>ii    ####M#MM##M#    i>i>i>i>    M#M#^                                              
+                             x###x   ^ii>iiii>iiii'''.''''>>>>>>i>>i>i>i>i    >i>iaM##!                                          
+                             xM#Mn   ^iiii>iiiii>i'..'''''>>>>>>>i>i>i>i>i    >i>io##Ml                                          
+                         xmmmc/t/+   ^iiiii>ii>iii.'.'''''^^^">>>>i>i>i>i>l!ll`'`'a###qmmm~                                      
+                         U###z}}}>   ^i>i>iii>ii>i'.''.'''''''>ii>>i>>>i>>i>>i    a#M#####-                                      
+                         U##Mz}}}i   ^>>i>i>ii>iii.'.''''''''`i>>i>>ii>>>>>>i>    a##M#M##?                                      
+                     m###n}}}LMMMc::;I>><!''''''''''.'.'''''''''''''''<>>>}}}}M#M#####t[}}m#MM(                                  
+                     m#M#x}}}CMMMc;::I<>>!''''''''''.''''''''`''''''''><><}}}}MM#MM#M#/}}}ZMM#|                                  
+                     mM##n}}}}}}})\/\[''''`''''''''''''''''''.''''''''''''////}}}}}}}}}}}}ZM#M(                                  
+                     mM#Mx}}}}}}})\/\]'''''''''''''''''.'''.'''''''.'''''`////}}}}}}}}}}}}ZMM#|                                  
+                     mM######J\\\_'''''''>MMMa`'`''''''''.MMMM#M#M''''''`'''''/\\\*MMMMMMMMM#M(                                  
+                     mM#M#M#MJ\/\_''.''''>M#Ma'''''''.'.''#M#MMMM#''.'''''''`'\\/\*MMMMMMMMMM#|                                  
+                         U###\''''''']###m   ^ZZZZ''''''.'    mmmmmmmm`'''><>>`'`'`'`'`'''JM#M(                                  
+                         U###\'''.'''[#M#m   ^OOOO`'''''.'    mmmmmmmm`''`>><>`'`'``'`'`'`JMMM(                                  
+                         U###\''''''']###m   ^OZOZ::::''.'    mmmmmmmm-___())(",",IIII+___OM#M(                                  
+                         U###\''.''.'[#M#m   ^OOZO}}}}''..    mmmmmmmm#M###M##<>>>\///k###M#MM(                                  
+                         U#M#\'''''''[###m   ^ZZOZ}}}}'.'.    OOOOOZOZ##M#M#M#><>>\///bM#MMM#M(                                  
+                         UMMM\'''''''[MMMm   `CCCC{}{}}}{}    OO0O0O00MMMM''''''''><><q###?                                      
+                         UM#M\`''''''[M#Mm   `CCCC}{}{}{}}    QQQQ0QQ0M#M#`''`''''>>><qM##?                                      
+                         UMM#MMMMY><>-\\\{                        .'''''''''''''''''''m#M#?                                      
+                         UM#MMMMMY><>-/\/{                        .''.''''''''''''''''w###?                                      
+                         U#MM\'`''`'',>>>}#M#a             ...    ''''''.'''''''''''''mMMM?                                      
+                         U##M\''''''`,><<}M##a            .'''..'.'.'.''''.'.'''''''''wMMM-                                      
+                         ]tftfjjj};;;I<>>]LLLCftffffff!!!!i!ii:;:;'''''''.;:;:'''':;::qMMM-                                      
+                             x#M#X<>>>><>+\\\f########[}[}}}[}<><>'`'`''''>>>>''`'i>>>pMMM-                                      
+                             xM##Y>><><>>+/\/t#M#M##M#}[}[}[}[><>>`'''''''>>>>''''i>>>pMMM-                                      
+                             xMMMX<<<<>><+\\/\/\\\M###}}}}iiii''''.'''>>>>\\\\>>>>oMM#!                                          
+                             xM#MY<<><>>>+/\\\\/\/####}}}}iiii''''''''>>>>\\\\>>>>o#MM!                                          
+                                 |###0><<>>><</\/\#M#Mi>i>iiii}}}}&&&&WWMM\\\\\\\\*MMM!                                          
+                                 (#M#Q<>>><>><\\\/####>i>iiiii}}}}&&&&WWMW\\\\\/\/*MMM!                                          
+                                     -#M#b\/\f#M##    iiii            }}}}MMMM\/\\*#M#!                                          
+                                     -M##k\\\f##M#    iiii            }{{}MMMM\\/\*M#M!                                          
+                                     ?###*pppw~~~+    ````        _+__}}}{jjjrddpdcvvvCQQQ<                                      
+                                     -M#M##M#a                    }}}}}{}{}{}}MMMMf\//kMMM-                                      
+                                     ?###M##Mh                    }}}}}{}}}{}{MMMMf//\bM#M?                                      
+                                     -MMMqiii!                !!!!M#MMM#MM        a#MMM#M#?                                      
+                                     ?M#Mqiii!                !l!lMMM#M#MM        aM#M#MMM?                                      
+                             x#M#####Qiii[MM#o!!!!!!!!!!!!!!!!!!!!l!l!MM#MM#MM        mM##MMM#(                                  
+                             x###M#M#Qiii[MM#o!!!!!!!!!!!!!!!!!l!!!!!!#MM#MMM#        mMMM##MM(                                  
+                             xM##muuuunuuY#M#o!!!!!!!!!!!!!!!!!!l!l!l!M#MM[}[}            JM#MMMM#n                              
+                             x#M#wunuuuunYMMMa!!!!!!!!!!!!!!!!!l!l!!!lMMMM}[}[            UMM#M#MMx                              
+                             x###muunuunuununcM#MM    !i!i        M#MM}}}}}}}}}}}}'       J#M#C/\/JMM#M#MM#MM#a                  
+                             xM##muuunuuuuuuuvMM#M    iiii        M#M#{}{}}}}}}}}}'       JMM#J//\JMM#MM#MM#MMa                  
+                             x##Mmuuuuuuuuuuuv*o**llll????lIlIIlIlMMMM}}}{}{}}{}{}'   liiiYkbkY\//YbkbkbkbhM##a                  
+                             xM##mnnuuuuuuuuuvmmmmmmmmmmmmmmmmmmmm##M#}}}}}}}}}}}}.   m#M#z//\///\//\/////nMMMa                  
+                             x#M#munuuuuuuuvuvmmmmmmmmmmmmmmmmmmmmMMMM}}}}}}}}}[}}'   mMMMz/\//\//\//\/\/\n#M#a                  
+                                 |####MMMMMMM#mmmmmmmmmmmmmmmmmmmmM#MM}}}}}}}}}}}}oM#Mn/\/\/////\/////zMMMm                      
+                                 (M#M#M#M#M#M#mmmmmmmmmmmmmmmmmmmmMMM#}}}}}}}}}}}}oMMMn\//\/\/\///\//\z#M#m                      
+                                         !#MM#mmmm####mmmmmmmmmmmmMM#MMM#MM#MM#M#Mf///kM#MMMM#MMMMM#MMU                          
+                                         !MM##mmmm#M#MmmmmmmmmmmmmMM#M#MMM#MM#MM#Mf///k#M#M#MM#M#M#M#MU                          
+                                         !#MMo}}}}M#M#mmmmmmmm}}}}[}}}M#MM/\//////////bMMM#M#M|                                  
+                                         !M#Mo}}}}#MMMmmmmmmmm[[}[}[}[MM#M//\/\\/\\/\/bM#MMMM#|                                  
+                                     :(((tCCCCuuuuWWMWkbkb/\\\>ii>[}}}M#M#JJJJ////////CO0Oh#MM(                                  
+                                     -M#Md[}}1dddd&&WWMMMM        }[}[MMMMMMMM/\/\/\/\////qMM#|                                  
+                                     -###d}[}{dddd&&WWWMM#        }}[}M##M#M#M\/////\/////q#MM(                                  
+                                     ?#M#*dddpvuuu&&&&MMMM            ii>i#M#MM#M##MM#MM#M?                                      
+                                     -###*dpdpuuuu88&WWMMM            i>iiMMM#MM#MM#M#M#M#?                                      
+                                     ?#M#huuuc8888&&&&WWMM                M#M#                                                   
+                                     -M##huvuc8&8&&8&WWWMM                M#MM                                                   
+                                     ?#MMW&&8Wuvvv8888&&WWWMMM            MM#M                                                   
+                                     ?MMMW&&&Wuvuv&8&8&&&WWM#M            M#M#                                                   
+                                 -UUJZWWW*LQLQkkkk\/\/WWWWMMM#            \\\\UUUU'                                              
+                                 (#MMWW&8*vuvc8&88iiiiM#M#M#MM            i>i>#M##`                                              
+                                 (#MMW&&&*uvvc88&8!ii!MM#MMM#M            >i>>###M^                                              
+                                 (#MWW&8888&8#iiiiiiii#MM#M#M#                M###`                                              
+                                 |#MMW&&88888#iiiii!ii#M#MMM#M                ##M#`                                              
+                                 (M#MQiiiiiiiiiii!uuuuMMM#M#MM                #M##^                                              
+                                 (MMMQi>i>i>iiiiiiuvuuM#MM#MM#                ###M`                                              
+                                 (MM#duuuuuuuvuuuuuuuuMM#M    ####        }}{}{{}}*MMM!                                          
+                                 (M#MduvuuuvuuuuuuuvuuMM#M    #M#M        }{}}}}{}*MMM!                                          
+                                 |#MMpuuuuuuuuuuuuunuu#MM#    M#M#}}}}}}}}}}}}}}}}*MMMl                                          
+                                 |M#MdnunuunuununuuuuuMM#M    MMMM}}}}}}}}}}}}}}}}oMMM!                                          
+                             `:::fMM#duuuuuuunuuuunuuu#MMM    M##M}}}}}}}}}}}}}}}}*MMM!                                          
+                             xMMM#M#MpuuununuuuunuuunuM#M#    M#M#}}}[}}}}}}}}}}}}oMMM!                                          
+                             xMM#MMM#dnuuunuuunuuunuuuM#MM    MMMM}}}}}}}[}}}}}}[}*MMM!                                          
+                             xMM#wuuuuuunuuuuuuunuM#MM        M##M}}}}}}}{}}}}}}}}*MMMl                                          
+                             xM#Mmuuuuunuuunununuu#M#M        MMMM}{}{}{}}{}{}}}}}oMMM!                                          
+                             xMMM#MMMM#MM#M#MM#M#M            #M#M}}{}uuuu{}}{unuu*MMM!                                          
+                             xM#MMM#MMM#M#MM#MMMMM            MMMM}{}{uuvu}}{}uuuu*MMM!                                          
+                                                              M#M#MM#MMMM#MM#M#M#M#MM#!                                          
+                                                              MMMMMM#M#M#M#MMM#MMMMM#M!                                          
+                                                              xxxxxxxxxxnxxxxxxxxxxxxx"                                          
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+                                                                                                                                 
+
+
+"""
