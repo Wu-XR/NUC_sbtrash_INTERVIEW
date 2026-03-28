@@ -32,7 +32,8 @@ ai-interview-system/
 │   │   ├── rag_engine.py                  # RAG 检索逻辑
 │   │   ├── multimodal.py                  # 音视频处理（Whisper + OpenCV）
 │   │   ├── scorer.py                      # 评分核心算法
-│   │   └── llm_client.py                  # LLM 调用封装（OpenAI/本地模型统一接口）
+│   │   └── llm_client.py                  # LLM 调用封装（deepseek/本地模型）
+│   │   └── llm_exception.py               # LLM 异常处理
 │   │
 │   ├── db/                                # 数据层
 │   │   ├── __init__.py
