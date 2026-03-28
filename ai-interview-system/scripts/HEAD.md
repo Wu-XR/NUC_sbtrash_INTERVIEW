@@ -1,137 +1,164 @@
-#!/usr/bin/env python3
-# ...existing code...
-import argparse
-import os
-import sys
-import traceback
+```txt
 
+                                                                                                  nQQQL!                                                                                                        
+                                                                                                 [CQQ0QQ)                                                                                                       
+                                                                                                \vvCQQQ0Qf                                                                                                      
+                                                                                               }vuvvLQ0QQQf                                                                                                     
+                                                                                              |uuuvuvCQQ0QQ\                                                                                                    
+                                                                                             ]uvuvuuuvLQQ0QQ_                                                                                                   
+                                                                                            }uuuvuvuuncLQQQ0L                                                                                                   
+                                                                                           ~uvuvuvuut\jzQQ0QQL                                                                                                  
+                                                                                          _uvuvuvuur||\jXQQQQQ\                                                                                                 
+                                                                                         Iuuuuuuvuu/|\\|jUQQ0QQ                                                                                                 
+                                                                                        luuvuvvuvuf|\|\\|rJQ0QQJ                                                                                                
+                                                                                       `uuvuvuuvux||l?|\\\nLQ0Q0!                                                                                               
+                                                                                       nvuvuuvuuvt\i  i|\|\zQQQQc                                                                                               
+                                                                                      )uuvuuvuvuu||    >\\|/UQQ0Q,                                                                                              
+                                                                                      uuvuvuvuvut|)     }\||rLQQ0U                                                                                         nu   
+                                                                                     xuvuuvuuvun||{      1\|\cQQQ0                                                                                      :rJQr   
+                                                                                    ^uuuvuvuvuvn|\>')1   ,|\|tJQ0Q-                                                                                   <uuuCQ|   
+                                                                                    {vuvuYUcuuun\|:}{});  {|\\vQQQx                                                                                 [uvuvvLQ-   
+                                                                                    uuvuXJJJUvvn||]){{{~   ||\jLQQJ                                                                               }uuuuuvuLQ"   
+                                                                                   ~uuuvUJCJJUvu/|})}{{}   }||fzQ0c                                                                             ?uuuvuvuvvQQ    
+                                                                               l   nuvucJJJJCJYuj(-1{}{{  !|\|juCQt                                                                           -uvvuvuvuuvcQJ    
+                                                                              )`  'uuuuXJJCJJCJvn)_{{{{}" ?\|\nvYQ[                                                                         [JCJvvntuvuvuXQ\    
+                                                                             1j   _uvuvUJJCJCJJzu|-{{{{{  |\|rvuzQi                                                                       _cJCCCcv/|nuvuvUQ<    
+                                                                            ?/r   |vuvvJCJJCJCJXv/-1{}{} >||fvUzvL                                                                      !IuCCCCCcr((/uvuvJL     
+                                                                           >//r^  nuvuzJJCJJJJJYuj}){{{< 1\/uUCUuU >                                                                  i>>vJCCCCUv||(|nuuvLJ     
+                                                                          :}\/r~ ;uvuvYCJCJCJCJUun]){{} !|/nYCJJc- C                                                                If 1vCCCCCCzt((((juuzQv     
+                                                                         I_|//x- tvuuvUCJJCJCJJUvu<1{{[`\\nUJJCJc  L.                                                             ln" (uJCCCCCUI?((((/uuCQ      
+                                                                        ,_-\//x- uuvucJJCJJCJCJJvul}(("]\nXJCJJC/ {L                                                            !x{  fvCCCCCLJ: .((((|nzQX      
+                                                                       ,__]\//n> uvuvvUJJCJJJJCJcu<~|-~|xXCJCCJJI CC                                                          ixx   fvUCCCCCC}   )((((xXQ}      
+                                                                      '?__[\/\n:;vuuvuvYJJCJCJCJXu~l)_|rzJJCJCJz /CC                                                        iuuvl  jvuJCCCCCn    [((((jJQ       
+                                                                     ^?___{///u -vuvuzXvcJJJCJJJYv>^(|rzXJJJCJz> nUJ                                                      ?uvJU\  jvCzYCCCCY  [1 ~(()(jQY       
+                                      :L}                            ?-_+_)//\u \uvuvuUJUvzUJCJCUu, \jJYYJCJUvt \tCc                                                    (uuYCJX  /vvJUzCCLU> )((.>)(((UQ^       
+                                      tQ;                          ']?____|//tu xvuuuuvXJJYvcJJJUu '/cCYJJJzvu!{ttL)                                                  )uvcJCJC| |uxfcCcCCC{ +(((l>(((fLj        
+                                     `Qv                           ]]-__+-//\j( uuvuvuvuvzUJcucUY} luuUUJXvuu(^/tjQ                                                 )nvuXJJCJJ']f|((jJcJJn !((((>+(((zL:        
+                                     jQ^                          []]____]///r-IjfuuvuvuuvuvUXvvn  /uvvuvnj){'tttnv                                              .1ruvvUJCJCJ]l|((((jUvvu .((((I;[((tLJ         
+                                     Yu                          ]]]?+ , -\//x;!>{`xuvuvuuvvvuu{  _uuux\11\/<\tttz?                                            >)tuuvzJJJCJCz?\(((((uuvv! 1(((' :()tCL          
+                                    ~Q[                         [[]]+ I, {/\/n f;-)>]vuuvuuuf)}  't()1)(\/\<|tt/fC                                           }||xuuvYJJJJJCJ]\(((((fuuur {((('  -(fXL|          
+                                    XQ                         -[[[-`": _)\/tu \/[!)<>uvux\))>   {))))11\\1\ttttrv                                         (((fuuvvUJJCJCJJ//|(((((xuur ,(()   ((xcLL           
+                          lQ?      :Qt                        ][[]]< I.I_(\/t~ |1]`l)-+f\)1{;   11)1111|\(ttt/t/v                                    >{li\()\n\/uvJJJJCJCJz)f(((((/uuu  (({  ](\nvJQ<           
+                          IQ1      fL                        ~[[[[? :;I,    ^i+----~I-l!111   :(11111)\\1\tttttt[  LC[                          (jjj\ [)))(r\1fuvcJJCJJCJX:x((((((fuv- )([ `((ruuYLf            
+                          `Q/      Yz                       _}[[]]+ I'   I>I"   i?{\-^-,}]   !)1111)\\\?\tttt/tv  !(nQQQCc}                 ?tjrjj]>{))()f/))/ucUzJJCJCJU<\j((((((nv1 ;(, [(/ucvcQL             
+                           Qu     ^Lt                    ~ ;}}[[[-~ I l__|//  1//////,+>    ]()(|///\(_\ttttttj  "{{1(/xXCQQQz]  ~}}]-~l` `>)t\1~?))())\/)))fuzJXXJJCJJY [j/(((((fvu  { ;(|rcUvcLL:             
+                           JJ     fL"                  :\ :}}{(\\-+ I'^_-|/1  \//////!><   \/////\/\1}ttt/t/t/]  )\ffffffffjvYLQC|I<[][]}{}[]][1)))()|t))))/uzJJcUJCJJJ +\n|(|((|nu` _ )(\uXCcvCQ)              
+                           vJ     Qz                  |\` }{\//\{__ "; >-|\  >/////\? -" I\\}`     `{/t/tttttf  \fffffft\(}]???[(uJY}?][][][{)))())(/())))tuzJJUzJJJCz ^(jx(((((nu]  _((xcJCYvJQu               
+                           /L"   +Q[                [\/~ {(\///)____ ,I  |i  (/\/\i ~-^ {_  .)tfffft|>I(tt/t1  /ffft)}(tffnYLQQLQCYf-~>+[{)))))))(t(())()/uvUJJYUJJJY  )(nf(((/uuu  ((fuYCCUvCQj                
+                           }Qi   |Q`              "\\/{ })\///\]_____; ,l~>;,:Ili+--`     ]tffffffffffcn-)t1  |ft|\tffffffffffjnzJQQQQLz|>i-))()t\)))())tvucJCUzCJC(  )(\u|((fx\r  1\nzJCCUvCQ1                 
+                           ~Q-   jJ              }///) })\/\/\}_+_+_l`,~,   ^^^,:Ii!   `|fff/\||tffnujfXLc~  ///ffffffff1       ^!-|rvXJQQLn?:~())()))(/uuvUCUzJCU~  <((jx(|rt|r+ +rzcJCCJzLQ+                  
+                           ,Qf   {t             \/\//^]{\////)___+: ;;'l'   //';`{<  ,/t/())))))tffuccxfXQL{|tfffffffffff(i             l}fzJLc>^!})()tuuvzJJXUJz.  !((|uj|x\\u| lXUzJCCJzQC.                   
+                            UL                >\\///:;1)////\]__+ ;; :_l   (/{ -   +f\(1)))))))|fffvcccujJQQJtfffffffffrccccurvJ{    ?)<      1nJv" >\uuvvUJcUJ/   ^|(|/uru|fuf  XYvJCCCUQz                     
+                                             1\////}!({///\\{__+ ,I '~!   ' l+   }\())))))))))(tffjvccccvjLQQQvfffffffffjvcccccvnvLUt   >t)1?:    Ir] 'jucUcXvI   ^f(((jux|nvr  cXvJCCUCL}                      
+                                            [////\( ({\//\(}-__~ I;;I;::~--i   1\))))))))))))\tfffjccczccvuLQQQcffffffffffrvcczcccunYQLj"  _())){!    ^  ]uur    'jt(((xuruv{  tcuUCJYCz                        
+                                           (/\///\"(){\/\(|[___+ ;,^`   `    \|))))))))))))|ffffffjccczczcvnQQQQuffffftftttffnccccccvxXLQL\  i))))tun?     `    irr\(((nvur   /uvvXzJX+ -I                      
+                                          _//////?]\{|/(\\{-_+__i I:      :/|)))))))))))(/fffffffffjvczczccrnL0QYfffftt\/\/\\tfxvurnvcvrXQLQY` >)fuvuuvun^     [rrr(((/uj   IuvuvvXv\ >u.                       
+                    "                    </////\{I\()\(\1}?______~. '   ?\()))))))))(/ttffffffffffjvjuczczccncQQLt[\ft\\\/\/\|/|/xccccuxxjUQQQX  (uvuvuu+      :jr/((|[   [uf`"jvur Iux   -                     
+                    _(:                  \\//\/\+/\}}1{}}]__+__+_+    {)))()(|\/tttfffffffffffffffncvrvczczcnUzQLf_<(/||\\\|\|((//(\fruccrfnLQQQj  +nvj     1/|/jj|+   _rvvx')]"; '/jf    YU                    
+                    Iff]"               _\/////+)/(}}}}}}-_+___~'  !ttffffffffffffffffffffffffffjfcccvjvccccrzzLL/{]+\|(|\|\||(){](t()/ffffffUQQQLI  '    ?\\\/j[   ]uuuvuuv,})11(tjjjf\rLXQ_                   
+                    `ffff_'             \/////{[/\1}}}}}?___+i   {t/ttttftfttftttttfffffffffffffffjxzcvrvcccjfvrJ(}{]_|(|||||\|(11_-1t\{\fffffuQQQLI;   +1/\|[  ?(|j/juvuvuvt.[)<'>       "Q|                   
+                     tfffff?I.         i/\////}///1}}}}]_+_^  +)(()(((()()()((\tfffffft/(}}/tfffffffczcvrvcff)1tv}}{{?})||||||||({{]-?)fr[1ffffrLQQQ<+J'  -"[((((jj((jvuuv( xut ?)){;    .YL:                   
+                     {\fffff\[[< ''    )///\/1|//\{}[}}_I  l{(((((((()(|\/tft/()1{{}}]??[(\\/tfffffjczccnr/t)1{(t-{{{{-)(||||||((){{{]?]/xz{{tffrL0Qv'xQYi  <(\rf|((|fuf <ruuuvu]  '\YLQLU+                     
+                     +()|tffft/}? <(}->IIl~_][((|){}[>''+|\||(()))){}[][]]][][[[[??__-}1)((|\/fffffxcczcx{/1111||?}][}-{((||((((|({}}{(??|fvY}}ffjCQQ}<JQQC-  I(((((- ';iuvvuvj                                 
+                     ;)1)1)\ffft\] i|(())()){}]?_>:^:~--____--?][]][][][][][]]-++__?{11)((|||/tffffuczct[(-!           <)|(|(((|(()}}{)(??(frCz-1fxQ(`,fYQQQQ\  ":  `l)1 ,:l+>                                  
+                      111111{)\ftf) "((()))11{[?[{}}}}[}[[[[[[[][][][][]]?_++++_?{{11111)((|||tfffrcct`               '+1(((((((((({}}}/{?]/ffUQj<)    tfzQ0QQQz  "nu_)){{{{1)))t/                              
+                      }11{{{{}{{{(t/'"()))1111{{{{{}}}[[[[[[[[[[][]?-_++_++-[[}}{{{{{111{[})/ffff-  `i{1}}{{{)1>      {+{((((((((((1[[}(t??)ftjCQu     'ffnQQQ0QQC1 ,j )[i     :/r+                             
+                      l}{?}}{{}}}}}}} "/|()1111{{}}[][]]]??--_+_+_+__?][}}}}}}}{}}[[??[}{|tft_l_()--1|)[}}{{1||}!    1{+{(((((((((()[[}{t]?1fffx)       )ffjCQQ0QQ0Ln!IlYx!      |\                             
+                       __-i_[}}}}[[[[[  {|t/(11{{{}}}[]?--_+_+_+__-----?---___+_-?][[{|tf1__/t\}+?1)){[}{1{{)|),]<  }){+{(((((((((()}[[}/??(ffti~CQL>   iffffcQQQ0QQQQL1^>nLz)i!]|~                             
+                       <]+!;i_}[[[}[[[]  ?[]{\tt(1{{}}}}[[[[[[]]]]???]?]]]][][[[[}(tft1l)t/(}__}{{11}[}{{1{1({>:_[1((){~{((((((()((([]]}(?]/ff?[UQQQ1!   \f|\tjJQQ0Q0Q0QQz}  .+_                                
+                        (|}I::I_[[[[[[[]^ ~[[]][]})/t/|1}}[[[[[[[][[[[][][[{(/tffjf(I(|({]+_[[}}{{1}?{11{1{)-~_"i((((1[~1(((()()))()[[][]-)ff<|fLQQQ~l[  (t|((((rLQQ0QQ0QQQLuI                                  
+                        !||([l,,:i?[[[[]]: !][[][]][][[}}{(|\t/t/tt/tttfftttt\|)))}1[]_~_]]]][[}{{)]{}{1{1}I_/":~((((1_+)()((()1)(()[]]-?1ff{|fcQQQ}I+){ ?/|)()()(jLQQ0QQ0Q0QQJfI                               
+                         -|||({+:,,I>+-][[!  ]__?[][][][[[[[][[[[[}}}}}}}{{{{{{[]_~~~_--???]][[})(-}{{{1{_'}f-^I[(|(({~?)((((){1)((1[[]~[tf}?fjCQQj'_\|( i/|(()(((()jJQ0QQQQ0Q0QQJr<                            
+                          (|||(()[l,":!>><~_  <~!!!i-+?][]][[[[[[[[[[}}[[?-+~<i!>~++_---???]]]1|\-}}{{1}; (f\::+||(|)]<1(((()}{((((}[]~-|t\-ffcQQC;{}f/(?I/|()(()()(((\YQQ0QQ0Q0Q0QQLX|l                        
+                           }|||||||)?:,"I>>>>`  !"",,ll;;>+_-__+~<>>>>il:,:l~~++++_------??]{|\)~[{{1{_ "(tf};!)|||(1~_)(((1[})()(1][+!{ff:/fxQQC;<])(|\/-t((()()((()()((jJQQQQQ0QQ0QQ0QQJr)<'                  
+                            {|||((||||1+:",I>>l  l[-iii~i!!!!i!!!!!ii~-][[}[}{1))(1{?---?[)(||{+}]]}[  -(|{l:?<|\||(-<}(()}[}(((()[]-i]ff:]tjLQQ-l(1()()))(\t\|((()(((())()(/XQQQQ0Q0QQ0Q0Q0QQr  I!"            
+                             "((||(|||||(}~;;;lil  !}[]??-----?][}{{{1)))(((((1{1{-__-?})}+lI;<}{{{" :((|tjI;(-|\\|}<-)))[[})))()}]_I-tf(,/fJQC<l\1))))111111{_)|\t/\|(((((((()(tnYLQQQQ0QCr[                   
+                               -(||||(|||||)]>I;;>!  !))(((((((((|(((((())111()}?]-__+iI!I,"  ':l:  {(((\nr'+\]\\\)<+{({[]{))(()}]<I-|t/ -tUQL<    I11111111[ _{{{}{{{)|////\|||(tff/{~,                        
+                                 ]|(|||||||||()?>II__   [)(]~{((((((|(((|(()[+-{{]}}+                _(\uu}^1\)\\\_+]1[[]{)))))[-!i-)f/^ (YQn       `)1{1{{l ^}{}{{}}{}{}{{}}{)1_                               
+                                   !|||||(|||||(()]<l_-I   I)"  :)(((((1?+~+{)(1_                       uf`[|\|\|+~-}[}]1))))1]<I<]1f(? :Yn          }{1{i  `}}{}}}{}{{}{}{}        ;i><:                       
+                  :I`                 >?})(|(|||||||({-__+I          "><?})((?        ~_l`                ;||\\|-~_[[[[1)1)1[+>l~]{t{}  f            "_     }{}}{}{}{}{{{{}{}[[]+<>>>>>                         
+                     +((|||){[]~!;:^"I+~~<<<><~+--?]][[[[?+<>>;                   +})(!,                   |/\(_+-[[?{111)}+<!!-[)|[]" ^        Uz        ;}}{{}{}}{}}}}]?_~>>>>>><>+i                          
+                        _)||||||||((1}]?-______++++++++___-_;   -}+            -]__?: ^                    I\1-+?[?[1111}_>i;<][|}??-I          JJ(      ><~<<<<<<<<<><<>>>><><~-[{{                            
+                           !(||(|||||||(||||(({[]??-???[}1'  !1{{111~        +][" uQQQQQC                   +??]--1111}->>;l?[[1___-{           UCX    ,-?----__+~<<<<<<~<_[)|\\\\!                             
+                              '>{)(|(|||||||||||||||(|(]   _{{{1))1|||+      (tf  QQ0QQC                  i  --_}111}_>>I:+[[}_+++_-           |JL!   1{]??-?-?--?]}1(\\\\\\\\\|i                               
+                                  ^l_[{{{{1{{{{{{{{{{,   }(((((||\|()}-!,                              _  ~  +{111}+<>:  -}}-~~~~+-!        i):lC!  .-1)))))())())()())))))))1"                                 
+                                      .";!+?[}}{{1?   i((()(|||)1}}]--_-{-i     ` .jzz:               :-  +: }11[~>i;   :{?<<<~~~-^         YQv!;  !~++]1)())()))))))())())~   {j     ?L/                       
+                   ;rLLQQLLCCC,          `{()1[+    }(((()1}}}{{}?__?)t(.   <:                        -  ']{ }[<>i:`   `?><><<<~~            \   !l -_++i<{))))()()()))[!   ./jUJ       XQt                     
+             }vJQQQv>                   l~<<~    ]()1{}}{}}}{}[_+?|t\:  i}}__>I".                 '  +`  1)~ >><I"     <><><<<+  /\        +j^  ].  }?--       .`.       _|tffjUQ{        zQc                   
+        !rJQJ/l                       ,<_-    i}{}}}}}}}}{1}__{/f['  +xzXz)lII,,,`^:I;;I;:`         i  :(1_  ><i      >><><>>  +uuzI  .   <i  lf_   >))1]+   :,`.',::{||\|\\fffULJ          /QYl                
+     ,vQX]`                         '~:    >}}{}}}}}{1))}-[(f1>  ^?rzzXzzt{-l:'^,l<~>!;II;I;"'.        ^I>> ;>   ~'  ><><<>  ,xuvuvY        ;lI~Xl   ))))){+   ~??-+>(|||||\tffXQQ]           ]LL]              
+    XL(                                ^]}}}{{{1(|()1]{\(?.   -\tjvzzzXzf{[}]lIII;IIl<][[]]>llII  l>_^   .>!   -)   <<<<>"  juvurt\tU    lIIli_}vQI  1)()()){_   ~?_>{|||\|\/ffvLQv             IzQX            
+              1QQL?                l)|||||||||((|\\_     -ttt//tfzXXXz"\(\/f[)iI-][][]][]_>i>~_  >|+>>>>>;   {((   <<~<:  tuuvr\||(}]xv  '[]]]]}fCL~  [)())))))-   i>[|||||||tfxLQL]    \Qn                     
+           :cQz^              ,-}1|||||||(?l       l+]})/tt/\\/jzzzzzz Iffuf[(ruvuuuxjt|]-"     -<><<>i   ,{(([  l~~_,  (vuvuvnxxj|||)}\Cv; _uuvuvJQ+ :>+{()()()1?`  l||(|(||/ffLQQc      XL}                   
+         ]JL[              '.              ',!-[[[[[}}1/t/\\|\\czXXXzx  +cc?(||ruuuxjf|1{11    i>>>i    _((||_  !?['  |uuvuvuvnnx/||||||{1uLn^ )uvvCQ? [_<i+}))))))]:  I((||||tfYQQL]      lJJ;                 
+       )QU>                   !<}1?<<~<<>><<_}]]]]]]]{\\/\((||nzzzzXv-!  {f[(((|ruuunjrff~'}  >>i`   <(((|/f:  ({   /uuvuuvuvun|f\|||(|(|([]jCL\ irvUQ: }?[-il~})))))]>  ^{(((\tuQQQc        |Lv                
+     +QLI                   .[(|)+~<~<>><<+[{{?????]}|\\|(()(tzXzXzz{?1   ;)(|(((juxxrrn/ ` `!    ](((|tnr)  "<  ,uuvvuvuvuuvuvn({?])|||(}-__-)JLL" fXL <}](1]-i;;?1))(]~   [(|tjCQ0L(         YQ-              
+    +L{                    ,{(|}<~~~<  ,_]}{}}?--??]|\\(1)))|nzzzXz(>\x    ?|(|(|(tnuuuvu     :}((|fnuuj|{     xJuuvuuvuvuvuvuuvuj1_      .^,;:^    ^ |C )}])()[?-_!":<1)}+l  "(fXQQQU;                         
+                          ;{|(]~~++,   -[}}}{]----?)(|11{{{)tcXXXzu<_rXl    -\|))(|/nvuu"  >  `fuuuuuj((i   !zCCCzuvuvuuvuuvuvur|[  ''''''''^"",,Il^    ~ )}](((([--~<><I^:i<>`  }LQQQ\                         
+                         I1((?~++~    ~[}}}{[-___-{(()1{}{{(rzzXzc_i{nzn     {f|1[(|\nvuuvvu-?z[,+ft(((<  (UJCCCCUuvuuvuuvuvuuvx{+ '''''''''':llll;!l:  1  \[]()(1?-_~~[(((}~;'    _zQU-                        
+                        l{((_+_+l    >}}{{}}[_+_+])()}1}[}{/vXzXz1I>tvXXI     >rt(?)(\xuvucUv+  nrrt?txuuvvzUXYJCCcvvuvuvuvuvuvuuf      '`'    ^,,^^ ` )f  ./][)))}-_~~-)()()())){<l"'(u"                       
+                       ;1(|?__+      [}}}}}}]+++-1))}{)[[})jzXzXr!i_fuXz_      ,jr\_[(|ruvvYCYf  nUXYcurt|(\fuvuvzXvuvuvuvuuvuvuvu\       ''''''    ; xJ  })\\?[)()]-I "1(()((((((|jLQQQ1                       
+                      I}((-__i      [}}{}}[}-~~+}1)[}1(]][/xXXzx+!>?fuXu!-;      jrf}_{|fuuvUCCx  JJvXJJUJYx(~ ?uuuvuuvuuvuvuuvuvuuj'     ''''''''  /Xu ?nXu)\\]])){?l  ,)(()()()()|uQQQJi                      
+                     "}(|[_-"   .  <{{}}}}}[+~+_11[}{({?]{fuzzx}I+>]tnXf,_[]:     ]rj)-](tuuvUCCU. UY/JUJJJJzff};uvuvuuvuvuuvuvuuvvurl          .ifcX{?tfuXzf1\(?]))?-    ))((()()()|zQ0QY;                     
+                    ^-||[-_    ^~  }{}{}{}}]~~~}{{}}1(]?](fcXxfi_}<]txz1"~-[[[>     tj([-}\nvvzJCJ!,Uz]UJU/tJUrf\ /uuvuuvuvuuvuvuuuvut~        ^fvXt/t)(/fvzX\)\)?])]]~    !)((((()((\XQQQt`                    
+                   '~(|{-<    "1  ]{}{}{}}}+<~-{{[}}()???/rznf_>])<[\jc?"+_-][[[]^   {j/{]-(xvuvXCJ} Xj>?+c )UUrff   `!-{))(())))11(xu|<     !uzz)ff( l)(/fnzz})\1-][}-      !)()((())\zQQQ\                    
+                   >)\{-!    I|:  {{{}{}{}]~<~[}}[}{|1--[tunf)"~1|~[(fu~^+__; i[[[-!   tf{}?]juvuvUCr'YYCLLJ+zJJUXvvnxxxxrjfftffff/{  x(l +jcU-?)fff/   -)\fxzc]|\{--[]>        1)()(()(vQ0L[                   
+                  ;1\(-`    ;(+  >{{{{{}{}-<<+[[}}})|}__)ffftl:_(\][1fr>'+__I    ?__??" 'f|{}?\uvuvcUcItJCLLu-JJJU   !JJJUJJJJJUzjft /|)nXuI`?{{1tffff_  :)|frzx+||}-?}-;         `{()((|xLQQ}                  
+                 "[||_     I\]l  [{{1{{{}}+<<?[[}}}||?__/fff]"<+\\)[1/f< ~__l    l_][[[]~ ;\1}]}nuuvvzc-?UJLC}/UXtJY -JYn}:IUJUUvx)+ruv)  :}{{{{{|fffff/  ')(/jc/+|\[???-             -(((fUQL}                 
+                '<|\-     ,|1<:  {1{11{{{]~<~[[]{{{\|-+-tff\ +++|\|{{\f- <+__<   _]][[[[[[[!~({}_|uuuvuvf;XJCJI\jJJU   1YUY(JUcj]-uf'   i[{{{{{{{)tj\fff(   [(\fc1_||[-?-+               ;[\nQQj                
+                ;|/~     :\|>>` ;1{111{1{?><+][}{{)|)_~?tff_ (++)\\1{)f} i____+   +][[[[[[[][~`1{]-tuvuvuu_]JCUJLQQCJCLLCJfvI[fnv1   l<<>-{{{{{{{1tf)(ff\{   I(|fx+_((]???~                   -CJ'              
+               ^}|<     ")/-><  <{11{111{+<>_][{1{(\{_~]fff`_\?~{\\(1{\\ :-?]]-_l  ~][][][][[[]+:>}?[xuvvuvj ?UJJCLCJJLLJz(fnuu+  :?}[;~nvj!!}{I>xUCY/>ft(,    1|fr<-||]?]?l                                    
+               !|>     ")/}<>_  +{111{1{{<>>-]}111|\[+~[ff_.}\}~; l|){)|  [[{[]?_+  :[[[[[[[][[[]?;"~-1nuvuuv[  (JJJJJJYfxuvj"  -}}}}-!Qj!}JJ!]CJ?~!_Qu:f|1  ]  ?|f/I_((}?]]!                                   
+              ^(l     .}t(>><]  <{1{1111}<><?[}1{1||[_<{f|';?\|>"  }|1{/' ]\|\1[[-_I  ]][][[[[[[[[]?+` !|uuuvuvf`    ::fuu1  i<+<}}}}[^Lc:[^vQL-l)t{:QL f/)  (t  :\f/I|{)}]]];                                  
+              +>     ']ff-<>>}" l111{1{1]><<?[{111|\[+<1f_ !>\\+^   |){1[ :|\|\{[[?_+  ]][[][[[[[[[[]-__" >xvuuuvuvvuvvr  >~~>>i;}}{}]I|Q~~{^^ [{|\{+Q/+ft(` {ff;  \f}^fc{]][[<                                 
+             'I      +ff1>><>{+  {1{1111]>><?[{111\\[+<1t^;i;(\_" '  (1{(  )\\\\{[[[-+. >][[[[][[][[[[]_])fti   {uuu(  +~~<~<>>;'}}}}?>^)Qrl{{{{1t+~LCI1ff|  }fff{  )f];trXv]][-                                
+             `      >/f/~<>><)[  {{11{1{]><<?]{{11\\[+>1- i>,?\[, I  ^){1?  |\|\|}[[]?_l ;-][[[[[[]?-_])\x1+,."l,.  i11-<~~<<>> .[}}}+>>l>LU>_{{+iuQ(:{{tf\  1|tfff  lf!;tfjXUf[?,                              
+                   :\ff}<><>+){  ~11111{?>>~-?{> !\\[+<['^>>!;|1I :>   }{)  ;\\\\|}[[[]_+ "_?][?--]?[)|jv\       "])))]+~+<~>>> :[}}}~>>>];tQX{cQLt']{{{/f[  ()(tfff>  |^~fffjYLv1<'                            
+                  "{ff|~>>>>_)1: `11{1{1-><<--_   ?\}+>< l>>>,>|< ">>`  -{?  }\\\\([[[[]-_  +_][]-})(/nuuv    i))()))]_~-+<<>>  ?-}}_>><<}{{"{(i ?{{{{{{\f  _()((/fff{  ) _fffffJQJ/i.                          
+                 '?jjf?<><><-11{  }11{11->><-+: ^ `\}_>" >>>>! -] `<>     {?  (\|\|}[[[[[-_, ___{(((rfjvuv]  I))()))[-_{_~<><;  {_}]<>>>-{{{{{|1{{{{{{{{/)  ))(()(/ffft  ^ {fffffjJQLr>"                        
+                 ~tjj|+!!<>>?{11<  {1111-<>>_+  ;' )1_> ;>><><! ?     ::I  `, .\\|)|}[]-?[?_> +_-)\t\\/nvu    )))()]-]1-~<><i  -1+]_<><~}{{{{/({{{{{{{{{)  )()()())/tfff~   |ffffffnCQLv?i                      
+                ;\jrj?`  !>>]1{{{  i{111?<>>__  il ;1_; !>>>>>"    ][[?:[[,     )[)[]-][[[??-< i_|\\\\\ruv    -)){??{{?~<<~!  _1)_><>>>?{{{{\){{{{{1{{1}  ])()((((((/ffff]   xnffffffzQQQv- '.                  
+               `1jrj)"  I>>>[{{{{<  ?11{]~>>+_  >>  __' i>i: <[[_  _[[?^[][[!    ?-_][[]??)(([_ <]\\\\\xvu}    -]?{)}-~<<<:  ?)11_>i>>+}{{1/|{{{1{{{{{?  {()(()()()()/ffff\  lfnUuffffjCQQQv+     ,I            
+              .+frjf'   _><>?{{{[<-  ?11[_>>~-  >>" !_  ':][[[[[[]i][[- [[[[]?    I[[]-[((((((\- :(\\\jUCcu  X   ^[-~<<~i  `1)1){[ii>~{{?^-){{{{{{1{{<  1()(()(()(()(|fffucj, ~utfYLnfffuQQQQv<                 
+              ;frxri   !+<>>?{}{?>?[  ]{}?<><<  >>i `<    ][[[[[[[[[[[_ ][][[],  !??_{(((((((xvv]'I\/tcJCJv\ Un <,    .  I{11)1)]{?l>]}!"'<{{{{{1{{?  l-~~{)(()(()(()((tfxccuI )YftfzLUrfjUQQQLjl               
+             ^{rxrI    )~<>>-}}}_>+\{  ?{?+>>l `>i.^ I r+   ][[[[[[[[[< >[[[[[  ;_-{(((((((tuvCCJ\,I/xYCCCUz^fUU nY;:[    <11))1-11!{[Il:,{{{{{{}I  ^<+---_~})()(()(()(\fjcccv|/CC~  ~vLLcjuLQQQL("             
+             >jrr<    !(+<>>+}[}~>~(\\  l}_>>^    ff  Ivvu<  `][[[[[[[l '[][?-"  ~_)(((((|rnncCCCCx,>uvUCCCc-?vJX xQz 1JX).   _[?))>~I<; ]{}[+:   <_+>>>~---++1)()()((((tfncccufjCLr    /LQUnJQQQQU_            
+            "trr~     }(_<<>+[[[~>>{|/t  `[~>  -}-?(;    l\x{  l[[[[[[' ']__+__<  +}((((\nt\\nzCCCCci>vzYCCXf uvUQ!cLQt /XLQLUI  :}?--+      ^+{{{]--_>><><---~?)((()()(|fjvvcvvtnQLn     -CQCYQQ0QQnI          
+           .]rx[      1(?~<><[[]>><_|1     _~  }{}}?-)fun\;     :][[][<~_+_-]___> i-(((rj\\\\fucJCCCY~`YUYCCz`/uuJC!xcCLi fvXQQQLX{  "--?{)1)1)1)))1{-_<>><><--_~))()(())/fvvvcvu/cQLu       rQQQQ0Q0C]         
+           ,tr]       |(]~<><][]>>l   .|/)  '  /|1{{}?-{tnuuuf].      l+_})(({___~I_1/r\\\\\\\fvuUCCCY],XYYCX(:vvvUJtUYzCn 'xuvUQQ0u  <  <{1))1)11)))1]_<<>><<~__+{(()(((|fxcvvvvxtCQQ/        iJQQ0QQQn;       
+          '{x(       :(|}++>>-[?>;   /jrt/\i  Ijrt\\()1?_{\xuuvvvuf"       :_11-__+_)r\\\\\\\\\rvvUCCCY< czYUc'nuvuUYuJCXYL; -uvuzJU  QQL/. I[11)111))1[_~><>+-<+_+{)()()(/fvvvvuvjxQQL>          nQQQ0QL[      
+          lr|        ~(|)++<>_[?>>:    [\\\\\tjr+!1\\tjrf}_}|ruuuvuuu+  }nux{I   'li+j\\\|\\\\\tuuvcUJCX+ uvYvljvuvvXvYCCJcJ) _uvuun  QQ0QQQJ; ,?11}{1)1[_~><<+{+~++{(()((|fnvvvvun/UQQL            \LQQ0Qv"    
+          }j         ?(||_+<>+]?>+>>iI      _jjrr,   )jjrjj|-]|ruuvuvuuj.  \vuuvuuuuunnj)[~!+[{})1}}uJXzv> rvv->uuuuvuvJCCCXzv nuvvn  vcLQQ0QQQJi  [1[[11[_<<><+)?++-1(((((tjvuuvuujuQQ0i             >LQ0QCl   
+         ,t          ]|||]++><]->-?<<<{1{{~       >-    <jrrj/[?(fuvuvuvun[   /uuvuzUJUJUUXzvux\?      \cu{ jv| nvvuuvuvYCCCYvYjuvux  "xvcJQQQ0QQQu   _?}1]_<<<~+({++])((|(tjuuvuvuufLQQf                YQQL1  
+         \"          ?(||{++>>-]>-1~<>-111tt//\\]!^        ;/rr/[-1fuuvuvuuvf;  luXcYJCCCCCCCCCJUYcxi    tvufvx {uuvuvuuvzCCCYuu:  >  cCCJXcXLQQQ0QQU+   !}_+<<~<-)1-_}((((\ffnuuuuufCQ0L                 `cQQx 
+        ;i           +|||)_+~>~]<+){<<<{{{(f/\\|/tffffff/{.   ;|r/[_{fnuujnuvvu/   <cYzUCCCCCCCCCCCCJz}   Iuuuu :vuvuuvuvuvUJCc} !vf  zCCCCCUcvJLQQQ0QQ{   '+~<<~~[))-_1|(||fxtuuuuujzQQQ,                  .XQ1
+        `            I||||[++<<?<+)(}~>+{{{\f\|((|tffffffffftI   `//?+[/uur|/xuvuu1   !vvvXJCCCCCCCCCCCz    fvuu|uvuvuvuuvuXJzv -uv)  vJCCCCCCJzvcJQQQQQQ?    i~<~~{()?[(((|fnntununrxQQ0?                    '[
+                      (|\||_+<>_+>)()?~<-{}}\f|((((\ffffffff\((|_    {__]\nutj/\juvux[   :xuvvXJCCCCCCCCY-   +vuvuvuvuuvuvuvvc` uuv+ "vUCCCCCCCCCYvvYQQ0QQX     >~~_(()[)(|(tnurjnnnxjQQQ)                      
+                      )\|\|[_+><->{(|(]<<[}}{t/())))|tffffft|(1)tft~    !_?|xnfxrf\/ruux-   `tuuvvXUCCCCCU\    ruvuuvuvuvuvuv[ (uvu` +vvXUUUUUUUJJJUvvzCQQ0C>    <~~[((1{(||tnnnjxunx/QQ0|     [Q]              
+                      }||\|)__<>+<?||||?<~[}}}t\)1)11)tfffft()){(/ffff+    !?(xrrxxxj/\fnuu-   '(uuuvvzXYYvu    "nuvuvuvuuvut ,uvuu  /vuvvYCJJJJUXzvvuuuzLQQj   >~~++(|()((|/nuuxrxnrfQQQ)      rL^             
+                      l|\\\\}_+<<~+(||||?>_[[[{f|1{{{{{\fff/11|}{1|tfffft[    <)rjxrxxxrt\/nuu/    [ruuuuvuuux!   ^ruvuuvuu/  ruuv+ ,vuvuuvXJJJCJCCCCCvvvvX  >_>^>~~+[(|((||trnnxfnnrxQQQ~       CL             
+                       )|\\\|]_~><<)||\\|]>?[[[}t){{{}{}(fft}[|)?}}1\/ffffff{    }jrxxxxxxrf\tuvvr>    /uvuvuvuvuunj?{[>!^  >nvuv(  uuuuvuvuuvuvuuuvvunrt  1(}_+i^~++_|(||||/rnnxfxxfcQ0Q        IQ(            
+                       `|\\\\)__<<<{\\\\\\[>?[][{t)}}}}}}{tt}-||)][[[(\\/ffffft[    )rrxxxxxrrftnuvun1     1nvuvuvuvuvvunxnvuvuvx  [vuvuuuvuvuuunrf/\/1 "1((|()-_I,++_}|||||tfxnnfrn/JQQJ         nL            
+                        )\\\\\}_+>>_|\\\\\\}<][[[{/1}}[[[[[|]>|(({?]??}(|||tffffft?    1rxrxxxxxrjnuuuvun]'    l)uuvuvuvuvuvuvui  /uuuuvunrjt//\/\\\_  -?(((((()}+`I+_-|||||ftrnxjrj/LQ0|         "Qu           
+                         |\\\\\]_~><1\\\\\\\}<]][]{/{[[[[[[[?;((1|{-?---{((((\tfvzzur[    )rxxxxxxrnuuvuXJCJXx>      :]1(|({l   :nnrf//\\\\\\\|)[-,       I-1)()(1_'~--)|||\t/jxn/j|jQQQ!          xQ'          
+                         "\\\\\|-_<>_\\/////|1?][][}\[[[][][? )([\\}_--_+_1)())(tjcXzXzn1    \xxxxxxxnuvuvJCCCCCCXvx-        i|\/\//\\\\\1]----+             `}(()1l`_-1|||/f/fnr(|(cQQQ           ,L{          
+                          [\\\\/|?_><)///////\1}]]]]}\[[]]]]] l|?|\\)____+~_1)))1)\juXXzzcx1    {xxxxxxuvuvXCCCCCCCJzvn);   '~(\\(}]--------~                   })){ !-{|\\\f\tx|((|LQQ1  |L"       YU          
+                           +\//\/(-+>_|/tt/|/t|1{[]]]}|[]]][]  []1\\/(?-}1}?~-{11111|tnzXzXvnv_    ijxxxnuvuvUCCCCLC/             -]}{111+                       `))+"?}\\\tf||()()uQQU   1L;       |Q;         
+                            }\///\(-+>]/t/[  1/\11}]]]}|[]]]]; ^]]\\/\\]11111]~?{1{{{1(txzzXznuzc!    ;(xxuvucXczYJX  `III;+-_<l   11];                            })`-[\\\tt(()()\CQQ<   }Ql        Qu         
+                             >\///\(-~<)//t:  </|1)1[]]}\[]]]I  >!1/////1}1))1{_<]1{{{{{(tfuzXzxuzXv`     [juuucUJUf   ,I;  ''l_+                                   1l:[\\/ft((()(uQQX    ?Q<        UQ         
+                              '/\///|-~<(t//^  `|\11([[]]|[]]:   !;{|tt//\]{))))]<~}{{{}{{|ffjczvjzzXc}       ]uuvvx    ^I .<__-_                                    < [\\ff\)()(\LQX     ~Q+        XQ         
+                                (////\?<~|t/(    }\1)(}[][\}[,    li1)\/tt/1]1)))1~>+}{}{}}{/ffjrrfxXXc}           -     ^;" >-_-`                                     ]\/ff|(()|JQQ^     iQ?        LJ         
+                                 l////\]~~|t/|    +\11(1[[](},      !1)(\///|][)()1+><]}}{{}{)fff+)ffvXc]                 ^,; !__"                                     ?\fft()((nQC"       ?                    
+                                   [////}~_|/t-    ,()1((}[[/I       l11))\t/t(-})))_>>_}}{}{}{\l   \frzv~                     ,<^  ;                                  ?tff|(()tQL:                             
+                                     )///(+<(/t]     1)1)(1[]I         [1)))\/t/){{1)_<><]{}{{{}}    :ffvui                  ^:"I   II                                 [fft(((/JY                               
+                                       [//\-~{/tl     _)))()[:          ;{11))|t//{[1}+>><?}{}{{{      {fxj:                   ,I   :                                  1fft()|Jj                                
+                                         ;|t{<?\/i     ;1)1((:            :}1)1)(///{?-_>>>-}{{}{       :/j)"                 '`                                       \ff|)|Xl                                 
+                                            _\_<)\"     `[11);               ~{))1(///{?+>><_}{{{<        (f[.                                                       `.ff/(({                                   
+                                                                                                                                                                                                                
 
-def check_imports():
-    info = {}
-    try:
-        import whisper
+```
 
-        info["whisper_imported"] = True
-        info["whisper_version"] = getattr(whisper, "__version__", "unknown")
-    except Exception as e:  # pragma: no cover - best-effort check
-        info["whisper_imported"] = False
-        info["whisper_error"] = str(e)
-
-    try:
-        import torch
-
-        info["torch_installed"] = True
-        info["torch_version"] = getattr(torch, "__version__", "unknown")
-        try:
-            info["cuda_available"] = bool(torch.cuda.is_available())
-        except Exception:
-            info["cuda_available"] = False
-    except Exception:
-        info["torch_installed"] = False
-
-    return info
-
-
-def try_load_model(model_name: str, download: bool = True):
-    import whisper
-
-    if not download:
-        # If user requested no download, avoid calling load_model which triggers downloads.
-        return {"loaded": None, "note": "skipped (no-download)"}
-
-    # Try loading the model (this may download weights and take time)
-    try:
-        model = whisper.load_model(model_name)
-        device = getattr(model, "device", None)
-        return {"loaded": True, "model_name": model_name, "device": str(device)}
-    except Exception as e:
-        return {"loaded": False, "error": str(e)}
-
-
-def try_transcribe(model, audio_path: str):
-    try:
-        if not os.path.exists(audio_path):
-            return {"success": False, "error": f"file not found: {audio_path}"}
-        result = model.transcribe(audio_path)
-        text = result.get("text", "") if isinstance(result, dict) else str(result)
-        return {"success": True, "text": text}
-    except Exception as e:
-        return {"success": False, "error": str(e)}
-
-
-def main():
-    parser = argparse.ArgumentParser(description="Check Whisper installation and optionally run a small transcription.")
-    parser.add_argument("--model", default="tiny", help="Model name to load (tiny, base, small, etc.).")
-    parser.add_argument("--test-audio", default=None, help="Path to an audio file to transcribe (optional).")
-    parser.add_argument("--no-download", action="store_true", help="Do not download or load the model (fast import-only check).")
-
-    args = parser.parse_args()
-
-    print("Checking imports...")
-    info = check_imports()
-
-    print("\n== Import check ==")
-    if info.get("whisper_imported"):
-        print(f"whisper imported: yes (version={info.get('whisper_version')})")
-    else:
-        print(f"whisper imported: NO\n  error: {info.get('whisper_error')}")
-
-    if info.get("torch_installed"):
-        print(f"torch installed: yes (version={info.get('torch_version')})")
-        print(f"cuda available: {info.get('cuda_available')}")
-    else:
-        print("torch installed: NO (optional but required for model inference)")
-
-    if args.no_download:
-        print("\nSkipping model load because --no-download was passed.")
-    else:
-        print(f"\nAttempting to load model '{args.model}' (may download weights and take time)...")
-
-    model_result = try_load_model(args.model, download=not args.no_download)
-
-    print("\n== Model load ==")
-    if model_result.get("loaded") is True:
-        print(f"Model loaded: {model_result.get('model_name')} on device {model_result.get('device')}")
-    elif model_result.get("loaded") is None:
-        print(f"Model load: skipped ({model_result.get('note')})")
-    else:
-        print(f"Model load failed: {model_result.get('error')}")
-
-    # If user asked to transcribe, do it (requires the model to be loaded)
-    if args.test_audio:
-        print(f"\nAttempting transcription on: {args.test_audio}")
-        if model_result.get("loaded") is not True:
-            print("Cannot transcribe because the model was not loaded. Use --no-download only for quick checks.")
-            sys.exit(3)
-
-        # load_model again to get the model object
-        try:
-            import whisper as _whisper
-
-            model = _whisper.load_model(args.model)
-            tresult = try_transcribe(model, args.test_audio)
-            if tresult.get("success"):
-                print("\n== Transcription result ==")
-                print(tresult.get("text"))
-            else:
-                print(f"Transcription failed: {tresult.get('error')}")
-                sys.exit(4)
-        except Exception:
-            print("Failed to run transcription. Full traceback:")
-            traceback.print_exc()
-            sys.exit(5)
-
-    print("\nCheck complete.")
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("Interrupted by user")
-        sys.exit(2)
-
-"""
+```txt
 
                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                     
@@ -277,4 +304,5 @@ if __name__ == "__main__":
                                                                                                                                                                     "<}|r(}~                                                        
                                                                                                                                                                                                                                     
 
-"""
+
+```
