@@ -19,7 +19,7 @@ class Settings(BaseSettings):
     QDRANT_API_KEY: Optional[str] = None
     
     DEFAULT_LLM_MODEL: str = "Qwen2.5vl:7b"
-    EMBEDDING_MODEL: str = "Qwen3-Embedding-0.6B"
+    EMBEDDING_MODEL: str = "Qwen2.5vl:7b"
     
     class Config:
         env_file = ".env"
