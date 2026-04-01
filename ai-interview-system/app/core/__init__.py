@@ -5,7 +5,7 @@ app/core/__init__.py
 """
 
 # 从 multimodal.py 导出语音转文字工具
-from .multimodal import AudioTranscriber
+from .multimodel import AudioTranscriber
 
 # 从 llm_client.py 导出大模型客户端和相关枚举
 from .llm_client import llm_client, LLMProvider, LLMResponse
